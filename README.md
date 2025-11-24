@@ -64,8 +64,8 @@ According to the OpenTelemetry documentation, a sample trace data in JSON format
 
 ### OpenTelemetry Database
 Database should be able to store large volumes of telemetry data with high availability and scalability.
-
 Database should support efficient querying and analysis of telemetry data.
+
 
 ## Discover root cause of an Incident (by Human)
 1. Use trace IDs to follow the request path across services.
@@ -93,3 +93,5 @@ A simple prompt template could be:
 6. The AI agent reviews the LLM response and formats it for human consumption.
 7. The AI agent presents the analysis to human operators for further action.
 
+## Agentic AI Architectural Components
+![Agentic AI Architecture](images/Obs_Agentic_AI.png)
