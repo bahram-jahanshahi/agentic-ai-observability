@@ -22,7 +22,45 @@ OpenTelemetry is an open-source observability framework that provides a standard
 2. Each service (or span) involved in processing the request logs relevant information, including the trace ID, span_id, parent_id, status (OK, ERROR), timestamps, attributes and events.
 3. Each service exports the collected telemetry data to a centralized database (preferably asynchronously) for storage and analysis.
 
+### Telemetry Data Types
+1. **Traces**: Represent the end-to-end journey of a request as it flows through various services. Each trace consists of multiple spans, each representing a unit of work within a service.
+2. **Metrics**: Quantitative measurements that provide insights into the performance and health of services
+3. **Logs**: Textual records that capture events and state changes within services, often used for debugging and auditing.
+...
 
+### Sample Trace Data
+According to the OpenTelemetry documentation, a sample trace data in JSON format looks like this:
+```json
+{
+  "name": "hello-greetings",
+  "context": {
+    "trace_id": "5b8aa5a2d2c872e8321cf37308d69df2",
+    "span_id": "5fb397be34d26b51"
+  },
+  "parent_id": "051581bf3cb55c13",
+  "start_time": "2022-04-29T18:52:58.114304Z",
+  "end_time": "2022-04-29T22:52:58.114561Z",
+  "attributes": {
+    "http.route": "some_route2"
+  },
+  "events": [
+    {
+      "name": "hey there!",
+      "timestamp": "2022-04-29T18:52:58.114561Z",
+      "attributes": {
+        "event_attributes": 1
+      }
+    },
+    {
+      "name": "bye now!",
+      "timestamp": "2022-04-29T18:52:58.114585Z",
+      "attributes": {
+        "event_attributes": 1
+      }
+    }
+  ]
+}
+```
 
 ### OpenTelemetry Database
 Database should be able to store large volumes of telemetry data with high availability and scalability.
