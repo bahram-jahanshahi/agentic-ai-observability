@@ -91,7 +91,7 @@ A simple prompt template could be:
 7. The AI agent presents the analysis to human operators for further action.
 
 ## Agentic AI Architectural Components
-<img src="images/Obs_Agentic_AI.png" alt="Agentic AI Architecture" width="75%">
+![Agentic AI Architecture](images/Obs_Agentic_AI.png)
 
 ## Google ADK
 The Google Agent Development Kit (ADK) provides tools and libraries to build intelligent agents that can interact with various data sources and perform complex tasks. In this architecture, the ADK is used to create an AI agent that can process telemetry data and perform root cause analysis.
