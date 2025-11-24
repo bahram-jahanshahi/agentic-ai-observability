@@ -10,8 +10,6 @@ This project is the most interesting in my opinion, but also requires the most w
 
 ## Observability with OpenTelemetry in Distributed Systems
 
-
-
 ### Overview
 OpenTelemetry is an open-source observability framework that provides a standardized way to collect, process, and export telemetry data (traces, metrics, and logs) from distributed systems. It enables developers to gain insights into the performance and behavior of their applications, making it easier to diagnose issues and optimize performance.
 
