@@ -96,6 +96,168 @@ A simple prompt template could be:
 ## Agentic AI Architectural Components
 ![Agentic AI Architecture](images/Obs_Agentic_AI.png)
 
+## Google ADK
+The Google Agent Development Kit (ADK) provides tools and libraries to build intelligent agents that can interact with various data sources and perform complex tasks. In this architecture, the ADK is used to create an AI agent that can process telemetry data and perform root cause analysis.
+
+This is a sample code snippet to create an AI agent using Google ADK:
+```python
+# -------------------------------------------------------------
+# Example: Agentic Root Cause Analysis Agent using Google ADK
+# -------------------------------------------------------------
+
+from adk import Agent
+from adk.tools import tool
+from adk.models import LLMModel
+from adk.context import AgentContext
+
+# -------------------------------------------------------------------
+# 1. Define tools your agent can call (DB queries, telemetry fetching)
+# -------------------------------------------------------------------
+
+@tool
+def fetch_telemetry(trace_id: str) -> dict:
+    """
+    Fetch logs, metrics, and traces associated with a trace_id.
+    Replace database calls with your actual storage backend.
+    """
+    # --- MOCK DATABASE LOGIC (replace with real queries) ---
+    traces = [
+        {
+            "span_id": "abc123",
+            "parent_id": None,
+            "service": "frontend",
+            "status": "OK",
+            "duration_ms": 25
+        },
+        {
+            "span_id": "def999",
+            "parent_id": "abc123",
+            "service": "checkout-service",
+            "status": "ERROR",
+            "duration_ms": 325,
+            "error_msg": "Timeout calling payment-service"
+        }
+    ]
+
+    logs = [
+        "checkout-service: Timeout while calling payment-service",
+        "payment-service: increased latency observed"
+    ]
+
+    metrics = {
+        "payment-service.latency_p95_ms": 850,
+        "payment-service.error_rate": 0.23
+    }
+
+    return {
+        "trace_id": trace_id,
+        "logs": logs,
+        "metrics": metrics,
+        "traces": traces
+    }
+
+
+@tool
+def build_service_graph(traces: list) -> str:
+    """
+    Builds a simple textual representation of the service dependency graph.
+    In real usage, build a graph structure or image.
+    """
+    edges = []
+    for span in traces:
+        if span.get("parent_id"):
+            edges.append(f"{span['parent_id']} -> {span['span_id']} ({span['service']})")
+
+    return "\n".join(edges)
+
+
+# -------------------------------------------------------------
+# 2. Define the LLM model used by the agent (Gemini or any LLM)
+# -------------------------------------------------------------
+
+model = LLMModel(
+    model="gemini-1.5-pro",  
+    temperature=0.2
+)
+
+# -------------------------------------------------------------
+# 3. Agent Prompt Template
+# -------------------------------------------------------------
+
+ROOT_CAUSE_PROMPT = """
+Agent Role:
+You are an AI agent specialized in analyzing distributed system telemetry data.
+
+Task:
+Investigate the likely root cause of an incident using the provided telemetry.
+
+Inputs:
+Trace ID: {trace_id}
+Logs:
+{logs}
+
+Metrics:
+{metrics}
+
+Traces:
+{traces}
+
+Service Dependency Graph:
+{graph}
+
+Output Format:
+- Root Cause Summary
+- Affected Services
+- Supporting Evidence
+- Recommended Remediation Steps
+"""
+
+# -------------------------------------------------------------
+# 4. Create the agent
+# -------------------------------------------------------------
+
+class RootCauseAgent(Agent):
+
+    def run_analysis(self, trace_id: str):
+        """
+        High-level method that orchestrates fetching telemetry,
+        building service graph, and requesting analysis.
+        """
+        # tool call 1: get logs/metrics/traces
+        telemetry = fetch_telemetry(trace_id)
+
+        # tool call 2: derive service graph from trace spans
+        graph = build_service_graph(telemetry["traces"])
+
+        prompt = ROOT_CAUSE_PROMPT.format(
+            trace_id=trace_id,
+            logs="\n".join(telemetry["logs"]),
+            metrics=str(telemetry["metrics"]),
+            traces=str(telemetry["traces"]),
+            graph=graph
+        )
+
+        # Call the LLM
+        response = self.model.generate(prompt)
+        return response
+
+
+# -------------------------------------------------------------
+# 5. Run the agent
+# -------------------------------------------------------------
+
+if __name__ == "__main__":
+    agent = RootCauseAgent(model=model)
+    
+    trace_id = "5b8aa5a2d2c872e8321cf37308d69df2"
+    result = agent.run_analysis(trace_id)
+
+    print("\n================ ROOT CAUSE ANALYSIS ================")
+    print(result.text)
+
+```
+       
+
 ## Agentic AI Challenges and Considerations
 1. Get logs, metrics, and traces associated with trace IDs efficiently.
 2. Discovering relevant telemetry data from large datasets based on trace IDs.
