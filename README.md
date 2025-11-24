@@ -95,3 +95,29 @@ A simple prompt template could be:
 
 ## Agentic AI Architectural Components
 ![Agentic AI Architecture](images/Obs_Agentic_AI.png)
+
+## Agentic AI Challenges and Considerations
+1. Get logs, metrics, and traces associated with trace IDs efficiently.
+2. Discovering relevant telemetry data from large datasets based on trace IDs.
+3. Context management to ensure the AI agent has sufficient information for analysis.
+4. Handling multi-modal data (logs, metrics, traces, dashboards, images, and ...) effectively.
+5. Ensuring the accuracy and reliability of the AI agent's analysis.
+6. Evaluating the performance of the AI agent against traditional root cause analysis methods.
+7. Dealing with noisy or incomplete telemetry data.
+8. Fine-tuning the LLM for domain-specific knowledge in distributed systems and observability.
+
+## Security and Privacy Considerations
+1. Ensure that sensitive telemetry data is handled securely and in compliance with privacy regulations.
+2. Following GDPR and other relevant data protection laws when processing telemetry data.
+3. Encrypting sensitive data during transmission and storage.
+
+## Evaluation Strategy
+1. Conduct controlled fault-injection experiments to create incidents in the distributed system.
+2. Measure the accuracy of root cause ranking by comparing the AI agent's analysis with known root causes.
+3. Analyze the robustness of the AI agent under noisy or incomplete telemetry data.
+4. Compare the performance of the agentic approach against simpler correlation-based or rule-based baselines.
+5. Collect feedback from human operators on the usefulness and clarity of the AI agent's analysis.
+
+## Conclusion
+This thesis explores the potential of agent-based systems to perform root cause localization in distributed systems using observability data. By leveraging OpenTelemetry and advanced AI techniques, the research aims to enhance the efficiency and accuracy of incident analysis, ultimately improving system reliability and performance.
+
