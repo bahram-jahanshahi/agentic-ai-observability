@@ -9,14 +9,14 @@ The research focus is on comparing different approaches to fusing multi-modal te
 This project is the most interesting in my opinion, but also requires the most work, since it also requires having built a root cause process that the agent can fetch information from. It also requires that you set up data storage/structure to handle all the telemetry data. Our team can support you in building parts of the project that you don’t think you’ll have time for.
 
 ## Observability with OpenTelemetry in Distributed Systems
-![OpenTelemetry Logo](images/Obs_Otel_Architecture.png)
+
 
 
 ### Overview
 OpenTelemetry is an open-source observability framework that provides a standardized way to collect, process, and export telemetry data (traces, metrics, and logs) from distributed systems. It enables developers to gain insights into the performance and behavior of their applications, making it easier to diagnose issues and optimize performance.
 
 ### Architecture Components
-
+![OpenTelemetry Logo](images/Obs_Otel_Architecture.png)
 ### Logging Mechanism
 1. When a request comes to system, a unique trace ID is generated to track the request across all services.
 2. Each service (or span) involved in processing the request logs relevant information, including the trace ID, span_id, parent_id, status (OK, ERROR), timestamps, attributes and events.
