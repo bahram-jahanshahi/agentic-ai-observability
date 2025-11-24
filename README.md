@@ -9,7 +9,7 @@ The research focus is on comparing different approaches to fusing multi-modal te
 This project is the most interesting in my opinion, but also requires the most work, since it also requires having built a root cause process that the agent can fetch information from. It also requires that you set up data storage/structure to handle all the telemetry data. Our team can support you in building parts of the project that you don’t think you’ll have time for.
 
 ## Observability with OpenTelemetry in Distributed Systems
-
+![OpenTelemetry Logo](images/Obs_Otel_Architecture.png)
 
 
 ### Overview
