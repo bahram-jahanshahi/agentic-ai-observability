@@ -6,8 +6,7 @@ This thesis investigates how agent-based systems can perform root cause localiza
 
 The research focus is on comparing different approaches to fusing multi-modal telemetry and exploiting service-dependency graphs, and on benchmarking an agentic approach against simpler correlation-based or rule-based baselines. You will run controlled fault-injection experiments, measure root cause ranking accuracy, and analyze robustness under noisy or incomplete telemetry.
 
-This project is the most interesting in my opinion, but also requires the most work, since it also requires having built a root cause process that the agent can fetch information from. It also requires that you set up data storage/structure to handle all the telemetry data. Our team can support you in building parts of the project that you don’t think you’ll have time for.
-
+This document presents a framework for using agent-based AI to perform automated root cause analysis in distributed systems by leveraging observability data—logs, metrics, and traces—collected through OpenTelemetry. It describes how telemetry is generated, stored, and correlated using trace IDs, and how service-dependency graphs reveal request flows across services. The core contribution is an agent built with Google’s Agent Development Kit (ADK) that retrieves relevant telemetry, constructs contextual prompts, and uses an LLM to reason about failures and propose likely root causes. The document outlines the architectural components, challenges of multi-modal data fusion, handling noisy or incomplete telemetry, and ensuring secure, scalable data management. It also details an evaluation strategy based on fault injection and comparisons with rule-based or correlation-based baselines, demonstrating how agentic AI can enhance the speed, accuracy, and robustness of incident analysis in complex distributed environments.
 ## Observability with OpenTelemetry in Distributed Systems
 
 ### Overview
